@@ -1,20 +1,30 @@
 package com.mycompany.ist412_group5.controller;
 
-import com.mycompany.ist412_group5.model.statistics.IntStatisticsManager;
-import com.mycompany.ist412_group5.model.statistics.StatisticsManager;
-import com.mycompany.ist412_group5.view.StatisticsView;
 
+/**
+ * Controller for managing statistics-related operations.
+ */
 public class StatisticsController {
-    private IntStatisticsManager statisticsManager;
-    private StatisticsView statisticsView;
+
+    private StatisticsManager statisticsManager;
 
     public StatisticsController() {
         this.statisticsManager = new StatisticsManager();
-        this.statisticsView = new StatisticsView();
     }
 
-    public void exampleStatisticsMethod() {
-        statisticsManager.exampleStatisticsMethod();
-        statisticsView.showStatistics();
+    /**
+     * Retrieves real-time park statistics.
+     * @return ParkStatistics object containing real-time statistics
+     */
+    public ParkStatistics getRealTimeStatistics() {
+        return statisticsManager.getRealTimeStatistics();
+    }
+
+    /**
+     * Generates a report based on park statistics.
+     * @return Report object containing the generated report
+     */
+    public Report generateReport() {
+        return statisticsManager.generateReport();
     }
 }
