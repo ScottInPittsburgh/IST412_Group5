@@ -25,6 +25,6 @@ public class StatisticsController {
      * @return Report object containing the generated report
      */
     public Report generateReport() {
-        return statisticsManager.generateReport();
+        return statisticsManager.generateReport(); 
     }
 }
