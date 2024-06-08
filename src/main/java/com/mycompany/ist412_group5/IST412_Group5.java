@@ -23,10 +23,12 @@ public class IST412_Group5 {
         UserProfileView userProfileView = new UserProfileView();
 
 
-        schedulingController.exampleSchedulingMethod();
-        schedulingView.showActivities();
+        //schedulingController.exampleSchedulingMethod();
+        //schedulingView.showActivities();
 
-        statisticsController.getRealTimeStatistics();
+        // Display the real-time statistics for the park
+        statisticsView.displayRealTimeStatistics();
+        // Display the generated report based on the park statistics
         statisticsView.displayReport();
 
         ticketController.exampleTicketMethod();
