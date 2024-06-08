@@ -9,6 +9,9 @@ import com.mycompany.ist412_group5.view.UserProfileView;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.EmergencyContact;
 
+/**
+ * Controller for managing User Profiles
+ */
 public class UserProfileController {
     private IntUserProfileManager userProfileManager;
     private UserProfileView userProfileView;
@@ -20,6 +23,7 @@ public class UserProfileController {
 
     /**
      * Views a user profile.
+     * Retrieves the user profile from the manager and displays it using the view.
      */
     public void viewUserProfile() {
         String userId = userProfileView.promptForUserId();
@@ -29,6 +33,8 @@ public class UserProfileController {
 
     /**
      * Adds an emergency contact to a user profile.
+     * Prompts for a user ID and emergency contact details, adds the contact
+     * using the manager, and displays the result using the view.
      */
     public void addEmergencyContact() {
         String userId = userProfileView.promptForUserId();
@@ -39,11 +45,14 @@ public class UserProfileController {
 
     /**
      * Updates an emergency contact in a user profile.
+     * @param userId - user id
+     * @param contact - updated emergency contact details
+     * @return a confirmation message or error
+     * Updates the contact using the manager and displays the result using the view.
      */
-    public void updateEmergencyContact() {
-        String userId = userProfileView.promptForUserId();
-        EmergencyContact contact = userProfileView.promptForEmergencyContact();
+    public String updateEmergencyContact(String userId, EmergencyContact contact) {
         String result = userProfileManager.updateEmergencyContact(userId, contact);
         userProfileView.displayMessage(result);
+        return result;
     }
 }

@@ -1,7 +1,10 @@
 package com.mycompany.ist412_group5.model.userprofile;
 /**
- *
  * @author Frank I
+ *
+ * Represents an emergency contact for a user.
+ * Contains information about the emergency contact's name and phone number.
+ *
  */
 public class EmergencyContact {
     private String name;

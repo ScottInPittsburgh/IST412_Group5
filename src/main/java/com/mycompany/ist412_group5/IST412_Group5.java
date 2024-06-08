@@ -34,7 +34,9 @@ public class IST412_Group5 {
         ticketController.exampleTicketMethod();
         ticketView.showTickets();
 
-        // Displays user profile
+        /**
+         * Displays user profile
+         */
         userProfileController.viewUserProfile();
     }
 }
