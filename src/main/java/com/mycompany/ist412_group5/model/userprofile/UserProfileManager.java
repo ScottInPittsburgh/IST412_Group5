@@ -3,7 +3,7 @@ package com.mycompany.ist412_group5.model.userprofile;
 public class UserProfileManager implements IntUserProfileManager {
     /**
      *
-     * @author Frank Imbrunone
+     * @author Frank I
      */
     @Override
     public UserProfile viewUserProfile(String userId) {

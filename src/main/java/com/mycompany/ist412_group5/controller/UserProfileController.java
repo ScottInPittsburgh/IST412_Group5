@@ -1,7 +1,7 @@
 package com.mycompany.ist412_group5.controller;
 /**
  *
- * @author Frank Imbrunone
+ * @author Frank I
  */
 import com.mycompany.ist412_group5.model.userprofile.IntUserProfileManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;

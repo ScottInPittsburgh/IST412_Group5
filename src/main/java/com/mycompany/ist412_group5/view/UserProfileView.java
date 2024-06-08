@@ -1,5 +1,8 @@
 package com.mycompany.ist412_group5.view;
-
+/**
+ *
+ * @author Frank I
+ */
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.EmergencyContact;
 

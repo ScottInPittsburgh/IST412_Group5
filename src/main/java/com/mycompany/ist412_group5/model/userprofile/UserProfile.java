@@ -1,7 +1,7 @@
 package com.mycompany.ist412_group5.model.userprofile;
 /**
  *
- * @author Frank Imbrunone
+ * @author Frank I
  */
 public class UserProfile {
     private String name;
