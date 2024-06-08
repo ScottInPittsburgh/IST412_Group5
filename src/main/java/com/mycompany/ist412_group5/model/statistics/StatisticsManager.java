@@ -2,8 +2,18 @@ package com.mycompany.ist412_group5.model.statistics;
 
 /**
  * StatisticsManager class to handle statistics-related operations.
+ *
+ * @author Bright Darko
  */
 public class StatisticsManager {
+
+    /**
+     * Default constructor for StatisticsManager.
+     * Initializes a new instance of the StatisticsManager class.
+     */
+    public StatisticsManager() {
+        // Default constructor
+    }
 
     /**
      * Retrieves real-time park statistics.

@@ -2,6 +2,8 @@ package com.mycompany.ist412_group5.model.statistics;
 
 /**
  * Interface for StatisticsManager class.
+ *
+ * @author Bright Darko
  */
 
 public interface IntStatisticsManager {

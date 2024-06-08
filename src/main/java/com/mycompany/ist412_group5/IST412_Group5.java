@@ -9,9 +9,13 @@ import com.mycompany.ist412_group5.view.StatisticsView;
 import com.mycompany.ist412_group5.view.TicketView;
 import com.mycompany.ist412_group5.view.UserProfileView;
 
+/**
+ * Main class for the IST412 Group 5 project.
+ * Initializes controllers and views, and displays various information.
+ */
 public class IST412_Group5 {
     public static void main(String[] args) {
-        
+
         SchedulingController schedulingController = new SchedulingController();
         StatisticsController statisticsController = new StatisticsController();
         TicketController ticketController = new TicketController();
@@ -26,9 +30,9 @@ public class IST412_Group5 {
         //schedulingController.exampleSchedulingMethod();
         //schedulingView.showActivities();
 
-        // Display the real-time statistics for the park
+        // Displays the real-time statistics for the park
         statisticsView.displayRealTimeStatistics();
-        // Display the generated report based on the park statistics
+        // Displays the generated report based on the park statistics
         statisticsView.displayReport();
 
         ticketController.exampleTicketMethod();
