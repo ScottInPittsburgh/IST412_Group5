@@ -9,7 +9,7 @@ import com.mycompany.ist412_group5.model.statistics.Report;
  */
 public class StatisticsView {
 
-    private StatisticsController statisticsController;
+    private final StatisticsController statisticsController;
 
     public StatisticsView() {
         this.statisticsController = new StatisticsController();

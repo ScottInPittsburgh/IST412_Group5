@@ -22,12 +22,12 @@ public class IST412_Group5 {
         TicketView ticketView = new TicketView();
         UserProfileView userProfileView = new UserProfileView();
 
-        
+
         schedulingController.exampleSchedulingMethod();
         schedulingView.showActivities();
 
-        statisticsController.exampleStatisticsMethod();
-        statisticsView.showStatistics();
+        statisticsController.getRealTimeStatistics();
+        statisticsView.displayReport();
 
         ticketController.exampleTicketMethod();
         ticketView.showTickets();
