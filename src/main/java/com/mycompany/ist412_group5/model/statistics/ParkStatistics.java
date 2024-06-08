@@ -10,6 +10,15 @@ public class ParkStatistics {
     private int rideWaitTimes;
     private String userFeedback;
 
+
+    /**
+     * Default constructor for ParkStatistics.
+     * Initializes a new instance of the ParkStatistics class.
+     */
+    public ParkStatistics() {
+        // Default constructor
+    }
+
     /**
      * Gets the attendance of the park.
      *

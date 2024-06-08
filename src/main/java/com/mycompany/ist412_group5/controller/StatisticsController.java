@@ -13,12 +13,17 @@ public class StatisticsController {
 
     private final StatisticsManager statisticsManager;
 
+    /**
+     * Default constructor for StatisticsController.
+     * Initializes a new instance of the StatisticsController class and sets up the StatisticsManager.
+     */
     public StatisticsController() {
         this.statisticsManager = new StatisticsManager();
     }
 
     /**
      * Retrieves real-time park statistics.
+     *
      * @return ParkStatistics object containing real-time statistics
      */
     public ParkStatistics getRealTimeStatistics() {

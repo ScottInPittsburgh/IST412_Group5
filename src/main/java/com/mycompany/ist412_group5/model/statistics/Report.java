@@ -8,6 +8,15 @@ package com.mycompany.ist412_group5.model.statistics;
 public class Report {
     private String content;
 
+
+    /**
+     * Default constructor for Report.
+     * Initializes a new instance of the Report class.
+     */
+    public Report() {
+        // Default constructor
+    }
+
     /**
      * Retrieves the content of the report.
      *
