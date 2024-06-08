@@ -2,6 +2,8 @@ package com.mycompany.ist412_group5.model.statistics;
 
 /**
  * StatisticsManager class to handle statistics-related operations.
+ *
+ * @author Bright Darko
  */
 public class StatisticsManager {
 
