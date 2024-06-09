@@ -1,3 +1,7 @@
+/**
+ * Package contains controllers for managing operations within project.
+ * Controllers: scheduling, ticket management, statistics, and user profiles.
+ */
 package com.mycompany.ist412_group5.controller;
 /**
  *

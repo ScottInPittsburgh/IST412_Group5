@@ -1,3 +1,7 @@
+/**
+ * Package provides classes and interfaces for managing user profiles.
+ * Includes classes for creating, updating, and viewing user profile information.
+ */
 package com.mycompany.ist412_group5.model.userprofile;
 /**
  *

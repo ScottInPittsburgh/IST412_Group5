@@ -1,3 +1,7 @@
+/**
+ * Package contains the view components of the application.
+ * Includes classes for displaying information to the user and collecting user input.
+ */
 package com.mycompany.ist412_group5.view;
 /**
  *

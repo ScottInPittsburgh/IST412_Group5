@@ -1,3 +1,7 @@
+/**
+ * This package contains the main entry point for the project.
+ * It includes the main class.
+ */
 package com.mycompany.ist412_group5;
 
 import com.mycompany.ist412_group5.controller.SchedulingController;

@@ -1,3 +1,7 @@
+/**
+ * Package provides classes and interfaces for managing park statistics.
+ * Includes classes for collecting, storing, and reporting statistical data.
+ */
 package com.mycompany.ist412_group5.model.statistics;
 
 /**
