@@ -14,6 +14,11 @@ import com.mycompany.ist412_group5.view.UserProfileView;
  * Initializes controllers and views, and displays various information.
  */
 public class IST412_Group5 {
+    /**
+     * main method, compiled project ran from here
+     *
+     * @param args command line arguments
+     */
     public static void main(String[] args) {
 
         SchedulingController schedulingController = new SchedulingController();

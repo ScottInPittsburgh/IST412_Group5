@@ -13,7 +13,9 @@ import com.mycompany.ist412_group5.view.SchedulingView;
 public class SchedulingController {
     private IntSchedulingManager schedulingManager;
     private SchedulingView schedulingView;
-
+ /**
+     * Constructs new SchedulingController instance
+     */
     public SchedulingController() {
         this.schedulingManager = new SchedulingManager();
         this.schedulingView = new SchedulingView();

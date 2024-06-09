@@ -23,8 +23,8 @@ public class SchedulingView {
     }
 
     /**
-     * display a message 
-     * @param message 
+     * Displays scheduling message
+     * @param message the message to be displayed
      */
     public void displayMessage(String message) {
         System.out.println(message);

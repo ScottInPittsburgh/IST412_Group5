@@ -16,6 +16,9 @@ public class UserProfileController {
     private IntUserProfileManager userProfileManager;
     private UserProfileView userProfileView;
 
+      /**
+     * Construct new UserProfileController instance
+     */
     public UserProfileController() {
         this.userProfileManager = new UserProfileManager();
         this.userProfileView = new UserProfileView();
