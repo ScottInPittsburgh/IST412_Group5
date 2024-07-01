@@ -1,50 +1,81 @@
 package com.mycompany.ist412_group5.model.userprofile;
+
+import java.io.*;
+
 /**
- *
- * @author Frank I
+ * Manages user profile data. Saves to file and loads from file user.ser
  */
-public class UserProfileManager implements IntUserProfileManager {
+public class UserProfileManager implements IntUserProfileManager, Serializable {
+    private UserProfile user;
 
     /**
-     * Retrieves and returns a user profile from the database.
+     * Constructs a UserProfileManager and loads the user data from the file.
+     */
+    public UserProfileManager() {
+        // Load user from stored file user.ser
+        loadFromFile();
+        // can add fields below to load new user if needed
+    }
+
+    /**
+     * Returns the user profile.
      *
-     * @param userId the ID of the user
      * @return the user profile
+     */
+    public UserProfile getUser() {
+        return user;
+    }
+
+    /**
+     * Saves the user profile to a file.
+     */
+    public void saveToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("user.ser"))) {
+            oos.writeObject(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the user profile from a file.
+     */
+    public void loadFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("user.ser"))) {
+            user = (UserProfile) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Retrieves a user profile based on user ID.
+     *
+     * @param userId The ID of the user.
+     * @return The user profile or null if not found.
      */
     @Override
     public UserProfile viewUserProfile(String userId) {
-        // Logic to retrieve and return a user profile from the database
-        UserProfile userProfile = new UserProfile();
-        userProfile.setName("Displays name...");
-        userProfile.setEmail("Displays email address..");
-        userProfile.setPhone("Displays phone number...");
-        userProfile.setEmergencyContact("Displays emergency contact info...");
-        return userProfile;
+        if (user.getUserId().equals(userId)) {
+            return user;
+        }
+        return null; // User not found
     }
 
     /**
-     * Adds an emergency contact to a user profile in the database.
+     * Updates the emergency contact information in the user profile.
      *
-     * @param userId the ID of the user
-     * @param contact the emergency contact details
-     * @return a confirmation message or error
-     */
-    @Override
-    public String addEmergencyContact(String userId, EmergencyContact contact) {
-        // Logic to add an emergency contact to a user profile in the database
-        return "Emergency contact added successfully";
-    }
-
-    /**
-     * Updates an emergency contact in a user profile in the database.
-     *
-     * @param userId the ID of the user
-     * @param contact the updated emergency contact details
-     * @return a confirmation message or error
+     * @param userId  The ID of the user.
+     * @param contact The new emergency contact details.
+     * @return A confirmation message or an error message.
      */
     @Override
     public String updateEmergencyContact(String userId, EmergencyContact contact) {
-        // Logic to update an emergency contact in a user profile in the database
-        return "Emergency contact updated successfully";
+        if (user.getUserId().equals(userId)) {
+            user.setEmergencyContact(contact);
+            saveToFile();
+            return "Emergency contact updated successfully";
+        }
+        return "User not found";
     }
 }

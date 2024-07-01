@@ -1,88 +1,55 @@
 package com.mycompany.ist412_group5.model.userprofile;
 
+import java.io.Serializable;
+
 /**
- * @author Frank I
- *
  * This class represents a user profile.
  * It contains information about the user's name, email, phone, and emergency contact.
- *
  */
-
-public class UserProfile {
+public class UserProfile implements Serializable {
+    private String userId;
     private String name;
     private String email;
     private String phone;
-    private String emergencyContact;
+    private EmergencyContact emergencyContact;
 
-    /**
-     * Gets the name of the user.
-     *
-     * @return the name of the user
-     */
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getName() {
         return name;
     }
 
-    /**
-     * Sets the name of the user.
-     *
-     * @param name the new name of the user
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * Gets the email of the user.
-     *
-     * @return the email of the user
-     */
     public String getEmail() {
         return email;
     }
 
-    /**
-     * Sets the email of the user.
-     *
-     * @param email the new email of the user
-     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    /**
-     * Gets the phone number of the user.
-     *
-     * @return the phone number of the user
-     */
     public String getPhone() {
         return phone;
     }
 
-    /**
-     * Sets the phone number of the user.
-     *
-     * @param phone the new phone number of the user
-     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    /**
-     * Gets the emergency contact of the user.
-     *
-     * @return the emergency contact of the user
-     */
-    public String getEmergencyContact() {
+    public EmergencyContact getEmergencyContact() {
         return emergencyContact;
     }
 
-    /**
-     * Sets the emergency contact of the user.
-     *
-     * @param emergencyContact the new emergency contact of the user
-     */
-    public void setEmergencyContact(String emergencyContact) {
+    public void setEmergencyContact(EmergencyContact emergencyContact) {
         this.emergencyContact = emergencyContact;
     }
 }

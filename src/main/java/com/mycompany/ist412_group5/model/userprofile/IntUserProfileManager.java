@@ -16,13 +16,6 @@ public interface IntUserProfileManager {
      */
     UserProfile viewUserProfile(String userId);
 
-    /**
-     * Adds an emergency contact to a user profile.
-     * @param userId The ID of the user.
-     * @param contact The emergency contact details.
-     * @return A confirmation message or error.
-     */
-    String addEmergencyContact(String userId, EmergencyContact contact);
 
     /**
      * Updates an emergency contact in a user profile.
@@ -31,5 +24,7 @@ public interface IntUserProfileManager {
      * @return A confirmation message or error.
      */
     String updateEmergencyContact(String userId, EmergencyContact contact);
+
+    UserProfile getUser();
 }
 
