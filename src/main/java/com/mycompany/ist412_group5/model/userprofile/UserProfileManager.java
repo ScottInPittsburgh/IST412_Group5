@@ -14,14 +14,23 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     public UserProfileManager() {
         // Load user from stored file user.ser
         loadFromFile();
-        // can add fields below to load new user if needed
+        // Create file if it does not exist
+        if (user == null) {
+            user = new UserProfile();
+            user.setUserId("jdd5003");
+            user.setName("John Doe");
+            user.setEmail("jdd5003@gmail.com");
+            user.setPhone("592-931-1213");
+            user.setEmergencyContact(new EmergencyContact("Jane Doe", "123-456-7890"));
+            saveToFile();
+        }
     }
 
-    /**
-     * Returns the user profile.
-     *
-     * @return the user profile
-     */
+        /**
+         * Returns the user profile.
+         *
+         * @return the user profile
+         */
     public UserProfile getUser() {
         return user;
     }

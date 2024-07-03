@@ -13,6 +13,7 @@ public class UserProfile implements Serializable {
     private String phone;
     private EmergencyContact emergencyContact;
 
+
     public String getUserId() {
         return userId;
     }
