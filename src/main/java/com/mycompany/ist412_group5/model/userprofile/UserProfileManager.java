@@ -17,9 +17,9 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
         // Create file if it does not exist
         if (user == null) {
             user = new UserProfile();
-            user.setUserId("jdd5003");
+            user.setUserId("jdd5002");
             user.setName("John Doe");
-            user.setEmail("jdd5003@gmail.com");
+            user.setEmail("jdd5002@gmail.com");
             user.setPhone("592-931-1213");
             user.setEmergencyContact(new EmergencyContact("Jane Doe", "123-456-7890"));
             saveToFile();
