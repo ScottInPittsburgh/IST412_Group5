@@ -5,18 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Manages user profiles and handles persistence.
+ * Manages user profiles, including authentication, registration, and persistent storage.
  */
 public class UserProfileManager implements IntUserProfileManager, Serializable {
     private Map<String, UserProfile> users;
+    private static final String FILE_NAME = "users.ser";
 
     /**
-     * Constructs a UserProfileManager instance and loads user profiles from a file.
-     * If no file is found, initializes with default users.
+     * Constructs a UserProfileManager, loading users from a file if it exists.
+     * If no users are found, initializes the manager with default users.
      */
     public UserProfileManager() {
         loadFromFile();
-        if (users == null) {
+        if (users == null || users.isEmpty()) {
             users = new HashMap<>();
             // Add some initial users
             users.put("admin", new UserProfile("admin", "admin", "Admin User", "admin@example.com", "123-456-7890", "admin", new EmergencyContact("Admin Contact", "098-765-4321")));
@@ -30,7 +31,7 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
      *
      * @param userId   The user ID.
      * @param password The password.
-     * @return The authenticated UserProfile or null if authentication fails.
+     * @return The authenticated user profile, or null if authentication fails.
      */
     @Override
     public UserProfile authenticate(String userId, String password) {
@@ -42,11 +43,11 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     }
 
     /**
-     * Saves user profiles to a file.
+     * Saves the current user data to a file.
      */
     @Override
     public void saveToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("users.ser"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             oos.writeObject(users);
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,11 +55,11 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     }
 
     /**
-     * Loads user profiles from a file.
+     * Loads user data from a file.
      */
     @Override
     public void loadFromFile() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("users.ser"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             users = (Map<String, UserProfile>) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             users = new HashMap<>();
@@ -68,7 +69,7 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     /**
      * Retrieves all user profiles.
      *
-     * @return A map of user IDs to UserProfile objects.
+     * @return A map of user profiles keyed by user ID.
      */
     @Override
     public Map<String, UserProfile> getAllUsers() {
@@ -78,8 +79,8 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     /**
      * Deletes a user profile based on user ID.
      *
-     * @param userId The user ID.
-     * @return true if the user was successfully deleted, false otherwise.
+     * @param userId The user ID of the user to be deleted.
+     * @return True if the user was deleted, false otherwise.
      */
     @Override
     public boolean deleteUser(String userId) {
@@ -94,7 +95,7 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     /**
      * Registers a new user profile.
      *
-     * @param userProfile The user profile to register.
+     * @param userProfile The user profile to be registered.
      */
     @Override
     public void registerUser(UserProfile userProfile) {
@@ -103,10 +104,10 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
     }
 
     /**
-     * Retrieves a user profile based on user ID.
+     * Views a user profile based on user ID.
      *
-     * @param userId The user ID.
-     * @return The UserProfile object or null if not found.
+     * @param userId The user ID of the profile to be viewed.
+     * @return The user profile, or null if not found.
      */
     @Override
     public UserProfile viewUserProfile(String userId) {
@@ -117,7 +118,7 @@ public class UserProfileManager implements IntUserProfileManager, Serializable {
      * Retrieves a user profile based on user ID.
      *
      * @param userId The user ID.
-     * @return The UserProfile object or null if not found.
+     * @return The user profile, or null if not found.
      */
     @Override
     public UserProfile getUser(String userId) {
