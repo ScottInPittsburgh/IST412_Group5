@@ -1,37 +1,95 @@
 package com.mycompany.ist412_group5.model.statistics;
 
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * StatisticsManager class to handle statistics-related operations.
+ * Manages statistics-related operations.
  *
  * @author Bright Darko
  */
-public class StatisticsManager {
+public class StatisticsManager implements IntStatisticsManager, Serializable {
+
+    private List<Feedback> feedbackList;
 
     /**
      * Default constructor for StatisticsManager.
-     * Initializes a new instance of the StatisticsManager class.
+     * Initializes a new instance of the StatisticsManager class and loads feedback from a file.
      */
     public StatisticsManager() {
-        // Default constructor
+        loadFeedbackFromFile();
+        if (feedbackList == null) {
+            feedbackList = new ArrayList<>();
+        }
     }
 
     /**
-     * Retrieves real-time park statistics.
+     * Retrieves real-time statistics for the park.
      *
-     * @return ParkStatistics object containing real-time statistics
+     * @return A ParkStatistics object containing real-time statistics.
      */
+    @Override
     public ParkStatistics getRealTimeStatistics() {
-
-        return new ParkStatistics();
+        return new ParkStatistics.Builder()
+                .setAttendance(5000)
+                .setRideWaitTimes(30)
+                .setUserFeedback("Very positive")
+                .build();
     }
 
     /**
-     * Generates a report based on park statistics.
+     * Generates a report based on the park statistics.
      *
-     * @return Report object containing the generated report
+     * @return A Report object containing the report content.
      */
+    @Override
     public Report generateReport() {
+        Report report = new Report();
+        report.setContent("Sample report content");
+        return report;
+    }
 
-        return new Report();
+    /**
+     * Adds feedback to the feedback list and saves it to a file.
+     *
+     * @param feedback The feedback to be added.
+     */
+    @Override
+    public void addFeedback(Feedback feedback) {
+        feedbackList.add(feedback);
+        saveFeedbackToFile();
+    }
+
+    /**
+     * Retrieves all feedback from the feedback list.
+     *
+     * @return A list of all feedback.
+     */
+    @Override
+    public List<Feedback> getAllFeedback() {
+        return feedbackList;
+    }
+
+    /**
+     * Saves the feedback list to a file.
+     */
+    private void saveFeedbackToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("feedback.ser"))) {
+            oos.writeObject(feedbackList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads the feedback list from a file.
+     */
+    private void loadFeedbackFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("feedback.ser"))) {
+            feedbackList = (List<Feedback>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            feedbackList = new ArrayList<>();
+        }
     }
 }
