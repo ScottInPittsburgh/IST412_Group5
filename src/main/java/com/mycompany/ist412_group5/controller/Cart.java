@@ -1,6 +1,5 @@
-package com.mycompany.ist412_group5.controller;
+package TicketMaster;
 
-import com.mycompany.ist412_group5.view.CheckOut;
 import java.awt.event.ActionEvent;
 import static java.lang.Double.isNaN;
 import java.util.ArrayList;
@@ -148,11 +147,14 @@ public class Cart extends javax.swing.JFrame {
 
             temp =  Integer.valueOf(JOptionPane.showInputDialog(null, "How many tickets do you want?"));
 
-            var decision =JOptionPane.showInputDialog(null, "are you ready to purchase? Type in Yes or No.");
+           
             tempTicket.add(temp);
+             if(temp == 0){JOptionPane.showMessageDialog(null, "The amount of ticket purchase needs to be higher than 0.");}
+             else{
+             var decision =JOptionPane.showInputDialog(null, "are you ready to purchase? Type in Yes or No.");
             if("Yes".equals(decision) || "yes".equals(decision)){key = 1; break;}
         }
-
+        }
         for(int i =0; i<=tempTicket.size()-1; i++){
             ticketTotal = ticketTotal + tempTicket.get(i);
             ticketRemaining = ticketRemaining - tempTicket.get(i);
@@ -168,7 +170,8 @@ public class Cart extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
          CheckOut CO = new CheckOut();
-    CO.viewingTicketsCancel();
+    ArrayList<Integer> x = CO.viewingTicketsCancel();
+     
     }                                        
 
 
