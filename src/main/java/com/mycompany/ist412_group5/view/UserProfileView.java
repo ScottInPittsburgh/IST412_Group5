@@ -7,12 +7,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * View - all user profile functions
+ * View class for displaying and editing user profiles.
  */
 public class UserProfileView {
 
     private HomeView homeView;
 
+    /**
+     * Constructs a UserProfileView instance.
+     *
+     * @param homeView the home view instance to update the main content panel
+     */
     public UserProfileView(HomeView homeView) {
         this.homeView = homeView;
     }
@@ -20,16 +25,19 @@ public class UserProfileView {
     /**
      * Displays the user profile details.
      *
-     * @param userProfile The profile details to be displayed.
+     * @param userProfile the profile details to be displayed
      */
     public void displayUserProfile(UserProfile userProfile) {
+        // Create a panel with BorderLayout
         JPanel profilePanel = new JPanel(new BorderLayout());
 
+        // Create a panel for profile details with GridBagLayout
         JPanel profileDetailsPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // spacing around components
         gbc.anchor = GridBagConstraints.WEST; // left-align the labels
 
+        // Add name label and value
         gbc.gridx = 0;
         gbc.gridy = 0;
         profileDetailsPanel.add(new JLabel("Name:"), gbc);
@@ -37,6 +45,7 @@ public class UserProfileView {
         gbc.gridx = 1;
         profileDetailsPanel.add(new JLabel(userProfile.getName()), gbc);
 
+        // Add email label and value
         gbc.gridx = 0;
         gbc.gridy = 1;
         profileDetailsPanel.add(new JLabel("Email:"), gbc);
@@ -44,6 +53,7 @@ public class UserProfileView {
         gbc.gridx = 1;
         profileDetailsPanel.add(new JLabel(userProfile.getEmail()), gbc);
 
+        // Add phone label and value
         gbc.gridx = 0;
         gbc.gridy = 2;
         profileDetailsPanel.add(new JLabel("Phone:"), gbc);
@@ -51,6 +61,7 @@ public class UserProfileView {
         gbc.gridx = 1;
         profileDetailsPanel.add(new JLabel(userProfile.getPhone()), gbc);
 
+        // Add emergency contact label and value
         gbc.gridx = 0;
         gbc.gridy = 3;
         profileDetailsPanel.add(new JLabel("Emergency Contact:"), gbc);
@@ -58,6 +69,7 @@ public class UserProfileView {
         gbc.gridx = 1;
         profileDetailsPanel.add(new JLabel(userProfile.getEmergencyContact().getName()), gbc);
 
+        // Add emergency contact phone label and value
         gbc.gridx = 0;
         gbc.gridy = 4;
         profileDetailsPanel.add(new JLabel("Emergency Contact Phone:"), gbc);
@@ -71,7 +83,7 @@ public class UserProfileView {
         gbc.gridwidth = 2;
         profileDetailsPanel.add(Box.createVerticalStrut(15), gbc);
 
-        // Adding update info button inside profile details panel
+        // Add update info button
         gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.CENTER; // Center the button
 
@@ -101,16 +113,19 @@ public class UserProfileView {
     /**
      * Displays the editable user profile details once the update button is clicked.
      *
-     * @param userProfile The profile details to be displayed and edited.
+     * @param userProfile the profile details to be displayed and edited
      */
     public void displayEditableUserProfile(UserProfile userProfile) {
+        // Create a panel with BorderLayout
         JPanel profilePanel = new JPanel(new BorderLayout());
 
+        // Create a panel for profile details with GridBagLayout
         JPanel profileDetailsPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // spacing around components
         gbc.anchor = GridBagConstraints.WEST; // left-align the labels
 
+        // Add name label and value
         gbc.gridx = 0;
         gbc.gridy = 0;
         profileDetailsPanel.add(new JLabel("Name:"), gbc);
@@ -120,6 +135,7 @@ public class UserProfileView {
         nameField.setEditable(false);
         profileDetailsPanel.add(nameField, gbc);
 
+        // Add email label and text field
         gbc.gridx = 0;
         gbc.gridy = 1;
         profileDetailsPanel.add(new JLabel("Email:"), gbc);
@@ -128,6 +144,7 @@ public class UserProfileView {
         JTextField emailField = new JTextField(userProfile.getEmail(), 20);
         profileDetailsPanel.add(emailField, gbc);
 
+        // Add phone label and text field
         gbc.gridx = 0;
         gbc.gridy = 2;
         profileDetailsPanel.add(new JLabel("Phone:"), gbc);
@@ -136,6 +153,7 @@ public class UserProfileView {
         JTextField phoneField = new JTextField(userProfile.getPhone(), 20);
         profileDetailsPanel.add(phoneField, gbc);
 
+        // Add emergency contact name label and text field
         gbc.gridx = 0;
         gbc.gridy = 3;
         profileDetailsPanel.add(new JLabel("Emergency Contact:"), gbc);
@@ -144,6 +162,7 @@ public class UserProfileView {
         JTextField emergencyContactNameField = new JTextField(userProfile.getEmergencyContact().getName(), 20);
         profileDetailsPanel.add(emergencyContactNameField, gbc);
 
+        // Add emergency contact phone label and text field
         gbc.gridx = 0;
         gbc.gridy = 4;
         profileDetailsPanel.add(new JLabel("Emergency Contact Phone:"), gbc);
@@ -158,7 +177,7 @@ public class UserProfileView {
         gbc.gridwidth = 2;
         profileDetailsPanel.add(Box.createVerticalStrut(15), gbc);
 
-        // Adding save button inside profile details panel
+        // Add save button
         gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.CENTER; // Center the button
 
@@ -191,48 +210,5 @@ public class UserProfileView {
         profilePanel.add(buttonPanel, BorderLayout.SOUTH);
 
         homeView.updateMainContentPanel(profilePanel);
-    }
-
-    /**
-     * Prompts the user to enter their user ID.
-     *
-     * @return The entered user ID.
-     */
-    public String promptForUserId() {
-        return JOptionPane.showInputDialog("Enter User ID:");
-    }
-
-    /**
-     * Prompts the user to enter emergency contact details.
-     *
-     * @return The entered emergency contact details.
-     */
-    public EmergencyContact promptForEmergencyContact() {
-        JTextField nameField = new JTextField();
-        JTextField phoneField = new JTextField();
-
-        Object[] message = {
-                "Name:", nameField,
-                "Phone:", phoneField
-        };
-
-        int option = JOptionPane.showConfirmDialog(null, message, "Enter Emergency Contact", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION) {
-            EmergencyContact contact = new EmergencyContact();
-            contact.setName(nameField.getText());
-            contact.setPhone(phoneField.getText());
-            return contact;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Displays a message to the user.
-     *
-     * @param message The message to be displayed.
-     */
-    public void displayMessage(String message) {
-        JOptionPane.showMessageDialog(null, message);
     }
 }

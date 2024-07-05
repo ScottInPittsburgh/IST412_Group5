@@ -1,100 +1,166 @@
 package com.mycompany.ist412_group5.view;
 
+import com.mycompany.ist412_group5.controller.FeedbackController;
+import com.mycompany.ist412_group5.controller.StatisticsController;
 import com.mycompany.ist412_group5.controller.UserProfileController;
-import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
+import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Main view class for the WallyLand Vacation Planner application.
+ * Handles the display of various components based on user actions.
+ */
 public class HomeView {
-
     private JPanel mainContentPanel;
     private UserProfileManager userProfileManager;
+    private FeedbackController feedbackController;
+    private StatisticsController statisticsController;
+    private UserProfile user;
 
-    public HomeView() {
+    /**
+     * Constructs a HomeView instance.
+     *
+     * @param userProfileManager   the user profile manager instance to manage user profiles
+     * @param feedbackController   the feedback controller to handle feedback operations
+     * @param statisticsController the statistics controller to handle statistics operations
+     * @param user                 the currently logged-in user
+     */
+    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user) {
+        this.userProfileManager = userProfileManager;
+        this.feedbackController = feedbackController;
+        this.statisticsController = statisticsController;
+        this.user = user;
+
         JFrame frame = new JFrame("WallyLand Vacation Planner");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
 
-        userProfileManager = new UserProfileManager();
-
-        // Get the user's name for the welcome message
-        UserProfile user = userProfileManager.getUser();
         String userName = user.getName();
+        String role = user.getRole();
 
-        // Panel for buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
         buttonPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createEmptyBorder(20, 10, 20, 10), // padding around the panel
-                BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK) // line on the right side
+                BorderFactory.createEmptyBorder(20, 10, 20, 10),
+                BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK)
         ));
-        buttonPanel.setPreferredSize(new Dimension(200, frame.getHeight())); // set size for the button panel
+        buttonPanel.setPreferredSize(new Dimension(200, frame.getHeight()));
 
-
-        // Welcome message
         JLabel welcomeLabel = new JLabel("<html><div style='text-align: center;'><b><font size='5'>Welcome,<br>" + userName + "</font></b></div></html>");
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel welcomePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         welcomePanel.add(welcomeLabel);
 
-        // Adding the welcomePanel to the buttonPanel
         buttonPanel.add(welcomePanel);
 
         JButton userProfileButton = new JButton("User Profile");
         JButton purchaseTicketsButton = new JButton("Purchase Tickets");
         JButton scheduleActivitiesButton = new JButton("Schedule Activities");
         JButton viewStatisticsButton = new JButton("View Statistics");
+        JButton addFeedbackButton = new JButton("Add Feedback");
+        JButton viewFeedbackButton = new JButton("View Feedback");
+        JButton adminViewUsersButton = new JButton("View Users");
         JButton quitButton = new JButton("Quit");
 
-        // Set a larger preferred size for the buttons
         Dimension buttonSize = new Dimension(160, 30);
         userProfileButton.setMaximumSize(buttonSize);
         purchaseTicketsButton.setMaximumSize(buttonSize);
         scheduleActivitiesButton.setMaximumSize(buttonSize);
         viewStatisticsButton.setMaximumSize(buttonSize);
+        addFeedbackButton.setMaximumSize(buttonSize);
+        viewFeedbackButton.setMaximumSize(buttonSize);
+        adminViewUsersButton.setMaximumSize(buttonSize);
         quitButton.setMaximumSize(buttonSize);
 
-        // Center-align the buttons
         userProfileButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         purchaseTicketsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         scheduleActivitiesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         viewStatisticsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addFeedbackButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewFeedbackButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        adminViewUsersButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         quitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        UserProfileController userProfileController = new UserProfileController(this, userProfileManager);
+        // Handle user profile action
+        userProfileButton.addActionListener(e -> {
+            UserProfileController userProfileController = new UserProfileController(this, userProfileManager);
+            userProfileController.viewUserProfile(user.getUserId());
+        });
 
-        userProfileButton.addActionListener(e -> userProfileController.viewUserProfile());
+        // Handle purchase tickets action
+        purchaseTicketsButton.addActionListener(e -> {
+            JPanel purchasePanel = new JPanel();
+            purchasePanel.add(new JLabel("Purchase Tickets - functionality to be implemented"));
+            updateMainContentPanel(purchasePanel);
+        });
 
-        // Add ticket button functionality here. See userProfileButton example above
-        purchaseTicketsButton.addActionListener(e -> System.out.println("Purchase Tickets clicked"));
+        // Handle schedule activities action
+        scheduleActivitiesButton.addActionListener(e -> {
+            JPanel schedulePanel = new JPanel();
+            schedulePanel.add(new JLabel("Schedule Activities - functionality to be implemented"));
+            updateMainContentPanel(schedulePanel);
+        });
 
-        // Add scheduling button functionality here. See userProfileButton example above
-        scheduleActivitiesButton.addActionListener(e -> System.out.println("Schedule Activities clicked"));
+        // Handle view statistics action for admin only
+        if ("admin".equals(role)) {
+            viewStatisticsButton.addActionListener(e -> {
+                StatisticsView statisticsView = new StatisticsView(this, statisticsController);
+                statisticsView.displayStatistics();
+            });
+        } else {
+            viewStatisticsButton.setEnabled(false);
+        }
 
-        // Add statistics button functionality here. See userProfileButton example above
-        viewStatisticsButton.addActionListener(e -> System.out.println("View Statistics clicked"));
+        // Handle add feedback action
+        addFeedbackButton.addActionListener(e -> {
+            FeedbackView feedbackView = new FeedbackView(this, feedbackController);
+            feedbackView.displayAddFeedbackForm(user.getUserId());
+        });
 
-        quitButton.addActionListener(e -> System.exit(0)); // terminates the application
+        // Handle view feedback action
+        viewFeedbackButton.addActionListener(e -> {
+            FeedbackView feedbackView = new FeedbackView(this, feedbackController);
+            feedbackView.displayAllFeedback();
+        });
 
-        // Add vertical struts for spacing
-        buttonPanel.add(Box.createVerticalStrut(10)); // space above the welcome message
-        buttonPanel.add(Box.createVerticalStrut(80)); // space above the first button
+        // Handle admin view users action
+        if ("admin".equals(role)) {
+            adminViewUsersButton.addActionListener(e -> {
+                AdminView adminView = new AdminView(this, feedbackController, new UserProfileController(this, userProfileManager));
+                adminView.displayAllUsers();
+            });
+        } else {
+            adminViewUsersButton.setEnabled(false);
+        }
+
+        quitButton.addActionListener(e -> System.exit(0));
+
+        buttonPanel.add(Box.createVerticalStrut(10));
+        buttonPanel.add(Box.createVerticalStrut(80));
         buttonPanel.add(userProfileButton);
-        buttonPanel.add(Box.createVerticalStrut(15)); // space between buttons
+        buttonPanel.add(Box.createVerticalStrut(15));
         buttonPanel.add(purchaseTicketsButton);
-        buttonPanel.add(Box.createVerticalStrut(15)); // space between buttons
+        buttonPanel.add(Box.createVerticalStrut(15));
         buttonPanel.add(scheduleActivitiesButton);
-        buttonPanel.add(Box.createVerticalStrut(15)); // space between buttons
+        buttonPanel.add(Box.createVerticalStrut(15));
         buttonPanel.add(viewStatisticsButton);
-        buttonPanel.add(Box.createVerticalGlue()); // push buttons upwards
-        buttonPanel.add(Box.createVerticalStrut(15)); // space between buttons and Quit button
-        buttonPanel.add(quitButton); // add the Quit button at the very bottom
+        buttonPanel.add(Box.createVerticalStrut(15));
+        buttonPanel.add(addFeedbackButton);
+        buttonPanel.add(Box.createVerticalStrut(15));
+        buttonPanel.add(viewFeedbackButton);
+        if ("admin".equals(role)) {
+            buttonPanel.add(Box.createVerticalStrut(15));
+            buttonPanel.add(adminViewUsersButton);
+        }
+        buttonPanel.add(Box.createVerticalGlue());
+        buttonPanel.add(Box.createVerticalStrut(15));
+        buttonPanel.add(quitButton);
 
-        // Main content panel (background)
         mainContentPanel = new JPanel();
         mainContentPanel.setLayout(new BorderLayout());
         mainContentPanel.setBackground(Color.LIGHT_GRAY);
@@ -105,6 +171,11 @@ public class HomeView {
         frame.setVisible(true);
     }
 
+    /**
+     * Updates the main content panel with a new panel.
+     *
+     * @param newPanel the new panel to be displayed
+     */
     public void updateMainContentPanel(JPanel newPanel) {
         mainContentPanel.removeAll();
         mainContentPanel.add(newPanel, BorderLayout.CENTER);
@@ -112,7 +183,11 @@ public class HomeView {
         mainContentPanel.repaint();
     }
 
-    // Method to get the UserProfileManager instance
+    /**
+     * Returns the user profile manager.
+     *
+     * @return the user profile manager
+     */
     public UserProfileManager getUserProfileManager() {
         return userProfileManager;
     }

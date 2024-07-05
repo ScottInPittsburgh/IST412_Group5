@@ -7,6 +7,8 @@ import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.EmergencyContact;
 import com.mycompany.ist412_group5.view.HomeView;
 
+import java.util.Map;
+
 /**
  * Controller for managing User Profiles
  */
@@ -30,9 +32,17 @@ public class UserProfileController {
      * Views a user profile.
      * Retrieves the user profile from the manager and displays it using the view.
      */
-    public void viewUserProfile() {
-        UserProfile userProfile = userProfileManager.getUser();
+    public void viewUserProfile(String userId) {
+        UserProfile userProfile = userProfileManager.viewUserProfile(userId);
         userProfileView.displayUserProfile(userProfile);
     }
 
+    /**
+     * Retrieves all user profiles.
+     *
+     * @return A map of all user profiles.
+     */
+    public Map<String, UserProfile> getAllUsers() {
+        return userProfileManager.getAllUsers();
+    }
 }
