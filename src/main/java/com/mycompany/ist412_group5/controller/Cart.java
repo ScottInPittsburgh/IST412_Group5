@@ -1,7 +1,6 @@
-package TicketMaster;
+package com.mycompany.ist412_group5.controller;
 
-import java.awt.event.ActionEvent;
-import static java.lang.Double.isNaN;
+import com.mycompany.ist412_group5.view.CheckOut;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -170,7 +169,10 @@ public class Cart extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
          CheckOut CO = new CheckOut();
-    ArrayList<Integer> x = CO.viewingTicketsCancel();
+
+        CO.viewingTicketsCancel();
+
+
      
     }                                        
 
