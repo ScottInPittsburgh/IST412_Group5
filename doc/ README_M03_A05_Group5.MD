@@ -30,4 +30,15 @@ accounts and view feedback.
 `IST412_Group5` is the main entry point, initializing the necessary managers and controllers before
 launching `LoginView`.
 
+# Logins
+
+Admin:
+User ID: admin
+Password: admin
+
+User:
+User ID: user
+Password: user
+
+
 
