@@ -1,7 +1,9 @@
 package com.mycompany.ist412_group5.view;
 
+import com.mycompany.ist412_group5.controller.Cart;
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
+import com.mycompany.ist412_group5.controller.TicketController;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 
@@ -17,6 +19,7 @@ public class LoginView {
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
+     private TicketController ticketController;
 
     /**
      * Constructs a LoginView instance.
@@ -25,10 +28,11 @@ public class LoginView {
      * @param feedbackController   the feedback controller
      * @param statisticsController the statistics controller
      */
-    public LoginView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController) {
+    public LoginView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
+         this.ticketController = ticketController;
 
         // Create the login frame
         JFrame frame = new JFrame("Login");
@@ -43,7 +47,6 @@ public class LoginView {
         // Make the frame visible
         frame.setVisible(true);
     }
-
     /**
      * Places the components on the panel.
      *
@@ -84,7 +87,7 @@ public class LoginView {
             UserProfile user = userProfileManager.authenticate(userId, password);
             if (user != null) {
                 // If authentication is successful, show the home view
-                new HomeView(userProfileManager, feedbackController, statisticsController, user);
+                new HomeView(userProfileManager, feedbackController, statisticsController, user, ticketController);
                 frame.dispose();
             } else {
                 // If authentication fails, show an error message
