@@ -1,5 +1,6 @@
 package com.mycompany.ist412_group5.view;
 
+import com.mycompany.ist412_group5.controller.Cart;
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
 import com.mycompany.ist412_group5.controller.UserProfileController;
@@ -18,6 +19,7 @@ public class HomeView {
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
+    private Cart cart;
     private UserProfile user;
 
     /**
@@ -28,10 +30,11 @@ public class HomeView {
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
      */
-    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user) {
+    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, Cart cart) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
+        this.cart = cart;
         this.user = user;
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
@@ -94,9 +97,7 @@ public class HomeView {
 
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
-            JPanel purchasePanel = new JPanel();
-            purchasePanel.add(new JLabel("Purchase Tickets - functionality to be implemented"));
-            updateMainContentPanel(purchasePanel);
+          cart.inital();
         });
 
         // Handle schedule activities action
