@@ -3,7 +3,9 @@ package com.mycompany.ist412_group5.view;
 import com.mycompany.ist412_group5.controller.Cart;
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
+import com.mycompany.ist412_group5.controller.TicketController;
 import com.mycompany.ist412_group5.controller.UserProfileController;
+import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 
@@ -19,7 +21,9 @@ public class HomeView {
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
-    private Cart cart;
+    private TicketController ticketController;
+    private TicketManager ticketManager;
+    private TicketView ticketView;
     private UserProfile user;
 
     /**
@@ -29,12 +33,13 @@ public class HomeView {
      * @param feedbackController   the feedback controller to handle feedback operations
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
+     * @param ticketController
      */
-    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, Cart cart) {
+    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
-        this.cart = cart;
+        this.ticketController =  ticketController;
         this.user = user;
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
@@ -97,6 +102,7 @@ public class HomeView {
 
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
+            Cart cart = new Cart();
           cart.inital();
         });
 
