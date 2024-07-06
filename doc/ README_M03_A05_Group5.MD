@@ -11,6 +11,7 @@
 
 - Netbeans Version: 22
 - IntelliJ Version: 2023.2.7
+- Project Type: Maven
 
 ## Class Descriptions and High-Level Overview
 
