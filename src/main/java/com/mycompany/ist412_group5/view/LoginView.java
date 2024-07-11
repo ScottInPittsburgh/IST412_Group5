@@ -1,9 +1,9 @@
 package com.mycompany.ist412_group5.view;
 
-import com.mycompany.ist412_group5.controller.Cart;
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
 import com.mycompany.ist412_group5.controller.TicketController;
+import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 
@@ -19,7 +19,9 @@ public class LoginView {
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
-     private TicketController ticketController;
+    private TicketController ticketController;
+    private TicketView ticketView;
+    private TicketManager ticketManager;
 
     /**
      * Constructs a LoginView instance.
@@ -47,6 +49,7 @@ public class LoginView {
         // Make the frame visible
         frame.setVisible(true);
     }
+
     /**
      * Places the components on the panel.
      *
