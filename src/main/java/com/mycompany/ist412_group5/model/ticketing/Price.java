@@ -1,4 +1,4 @@
-package TicketMaster;
+package com.mycompany.ist412_group5.model.ticketing;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
