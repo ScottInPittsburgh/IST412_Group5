@@ -21,10 +21,10 @@ public class HomeView {
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
-    private TicketController ticketController;
-    private TicketManager ticketManager;
-    private TicketView ticketView;
     private UserProfile user;
+     private TicketController ticketController;
+    private TicketView ticketView;
+    private TicketManager ticketManager;
 
     /**
      * Constructs a HomeView instance.
@@ -34,13 +34,16 @@ public class HomeView {
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
      * @param ticketController
+     * @param ticketView
+     * @param ticketManager
      */
     public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
-        this.ticketController =  ticketController;
         this.user = user;
+        this.ticketController = ticketController;
+      
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,8 +105,9 @@ public class HomeView {
 
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
-            Cart cart = new Cart();
-          cart.inital();
+            JPanel purchasePanel = new JPanel();
+          Cart cart = new Cart();
+            cart.inital();
         });
 
         // Handle schedule activities action
