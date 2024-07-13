@@ -1,8 +1,11 @@
 package com.mycompany.ist412_group5.view;
 
+import com.mycompany.ist412_group5.controller.Cart;
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
+import com.mycompany.ist412_group5.controller.TicketController;
 import com.mycompany.ist412_group5.controller.UserProfileController;
+import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 
@@ -19,6 +22,9 @@ public class HomeView {
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
     private UserProfile user;
+     private TicketController ticketController;
+    private TicketView ticketView;
+    private TicketManager ticketManager;
 
     /**
      * Constructs a HomeView instance.
@@ -27,12 +33,17 @@ public class HomeView {
      * @param feedbackController   the feedback controller to handle feedback operations
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
+     * @param ticketController
+     * @param ticketView
+     * @param ticketManager
      */
-    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user) {
+    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
         this.user = user;
+        this.ticketController = ticketController;
+      
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,8 +106,8 @@ public class HomeView {
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
             JPanel purchasePanel = new JPanel();
-            purchasePanel.add(new JLabel("Purchase Tickets - functionality to be implemented"));
-            updateMainContentPanel(purchasePanel);
+          Cart cart = new Cart();
+            cart.inital();
         });
 
         // Handle schedule activities action

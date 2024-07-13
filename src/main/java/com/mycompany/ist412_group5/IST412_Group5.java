@@ -2,9 +2,13 @@ package com.mycompany.ist412_group5;
 
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
+import com.mycompany.ist412_group5.controller.TicketController;
 import com.mycompany.ist412_group5.model.statistics.StatisticsManager;
+import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 import com.mycompany.ist412_group5.view.LoginView;
+import com.mycompany.ist412_group5.view.TicketView;
+
 
 /**
  * Main class for the IST412 Group 5 project.
@@ -20,6 +24,9 @@ public class IST412_Group5 {
     public static void main(String[] args) {
         // Initialize the user profile manager
         UserProfileManager userProfileManager = new UserProfileManager();
+        
+        TicketManager ticketManager = new TicketManager();
+        TicketView ticketView = new TicketView();
 
         // Initialize the statistics manager
         StatisticsManager statisticsManager = new StatisticsManager();
@@ -29,8 +36,10 @@ public class IST412_Group5 {
 
         // Initialize the statistics controller with the statistics manager
         StatisticsController statisticsController = new StatisticsController(statisticsManager);
+        
+        TicketController ticketController = new TicketController(ticketManager, ticketView);
 
         // Display the login view
-        new LoginView(userProfileManager, feedbackController, statisticsController);
+        new LoginView(userProfileManager, feedbackController, statisticsController, ticketController);
     }
 }

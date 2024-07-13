@@ -1,4 +1,4 @@
-package TicketMaster;
+package com.mycompany.ist412_group5.model.ticketing;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -11,15 +11,15 @@ package TicketMaster;
  */
 public class Price {
    //private attributes for the Price class
-private double price = this.price;
-private float tax = this.tax;
+private float price = 6.99f;
+private float tax = .06f;
     
     //The get and set prices
-public void getPrice(){}
+public float getPrice(){return price;}
 
-public static void setPrice( double price) {}
+public static void setPrice( float price) {}
 
-public void getTax(){}
+public float getTax(){return tax;}
 
 public static void setTax(float tax) {}
 }
