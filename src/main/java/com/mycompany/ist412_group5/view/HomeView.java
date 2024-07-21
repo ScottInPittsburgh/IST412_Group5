@@ -1,10 +1,6 @@
 package com.mycompany.ist412_group5.view;
 
-import com.mycompany.ist412_group5.controller.Cart;
-import com.mycompany.ist412_group5.controller.FeedbackController;
-import com.mycompany.ist412_group5.controller.StatisticsController;
-import com.mycompany.ist412_group5.controller.TicketController;
-import com.mycompany.ist412_group5.controller.UserProfileController;
+import com.mycompany.ist412_group5.controller.*;
 import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
@@ -22,9 +18,10 @@ public class HomeView {
     private FeedbackController feedbackController;
     private StatisticsController statisticsController;
     private UserProfile user;
-     private TicketController ticketController;
+    private TicketController ticketController;
     private TicketView ticketView;
     private TicketManager ticketManager;
+    private SchedulingController schedulingController;
 
     /**
      * Constructs a HomeView instance.
@@ -43,12 +40,14 @@ public class HomeView {
         this.statisticsController = statisticsController;
         this.user = user;
         this.ticketController = ticketController;
+        this.schedulingController = new SchedulingController(this, user);
       
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
 
         String userName = user.getName();
         String role = user.getRole();
@@ -112,9 +111,7 @@ public class HomeView {
 
         // Handle schedule activities action
         scheduleActivitiesButton.addActionListener(e -> {
-            JPanel schedulePanel = new JPanel();
-            schedulePanel.add(new JLabel("Schedule Activities - functionality to be implemented"));
-            updateMainContentPanel(schedulePanel);
+            schedulingController.showSchedulingView();
         });
 
         // Handle view statistics action for admin only

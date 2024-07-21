@@ -40,6 +40,7 @@ public class LoginView {
         JFrame frame = new JFrame("Login");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 200);
+        frame.setResizable(false);
 
         // Create a panel to hold the login components
         JPanel panel = new JPanel();
