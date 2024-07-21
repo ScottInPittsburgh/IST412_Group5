@@ -47,6 +47,7 @@ public class HomeView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
+        frame.setResizable(false);
 
         String userName = user.getName();
         String role = user.getRole();
