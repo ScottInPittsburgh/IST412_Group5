@@ -2,6 +2,7 @@ package com.mycompany.ist412_group5.view;
 
 import com.mycompany.ist412_group5.controller.FeedbackController;
 import com.mycompany.ist412_group5.controller.StatisticsController;
+import com.mycompany.ist412_group5.controller.TicketController;
 import com.mycompany.ist412_group5.controller.UserProfileController;
 import com.mycompany.ist412_group5.model.userprofile.UserProfile;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
@@ -14,6 +15,7 @@ import java.awt.*;
  * Handles the display of various components based on user actions.
  */
 public class HomeView {
+    private final TicketController ticketController;
     private JPanel mainContentPanel;
     private UserProfileManager userProfileManager;
     private FeedbackController feedbackController;
@@ -28,10 +30,11 @@ public class HomeView {
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
      */
-    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user) {
+    public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
         this.feedbackController = feedbackController;
         this.statisticsController = statisticsController;
+        this.ticketController = ticketController;
         this.user = user;
 
         JFrame frame = new JFrame("WallyLand Vacation Planner");
@@ -94,9 +97,9 @@ public class HomeView {
 
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
-            JPanel purchasePanel = new JPanel();
-            purchasePanel.add(new JLabel("Purchase Tickets - functionality to be implemented"));
-            updateMainContentPanel(purchasePanel);
+          TicketView ticketView = new TicketView(this, ticketController);
+            ticketView.initComponents();
+
         });
 
         // Handle schedule activities action
