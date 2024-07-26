@@ -31,8 +31,6 @@ public class HomeView {
      * @param statisticsController the statistics controller to handle statistics operations
      * @param user                 the currently logged-in user
      * @param ticketController
-     * @param ticketView
-     * @param ticketManager
      */
     public HomeView(UserProfileManager userProfileManager, FeedbackController feedbackController, StatisticsController statisticsController, UserProfile user, TicketController ticketController) {
         this.userProfileManager = userProfileManager;
@@ -104,9 +102,9 @@ public class HomeView {
 
         // Handle purchase tickets action
         purchaseTicketsButton.addActionListener(e -> {
-            JPanel purchasePanel = new JPanel();
-          Cart cart = new Cart();
-            cart.inital();
+            TicketView ticketView = new TicketView(this, ticketController);
+            ticketView.initComponents();
+
         });
 
         // Handle schedule activities action

@@ -14,9 +14,9 @@ public class TicketController {
      /**
      * Construct new TicketController instance
      */
-    public TicketController(TicketManager ticketManager, TicketView ticketView) {
+    public TicketController(TicketManager ticketManager) {
         this.ticketManager = new TicketManager();
-        this.ticketView = new TicketView();
+
     }
 
     /**
@@ -24,6 +24,5 @@ public class TicketController {
      */
     public void exampleTicketMethod() {
         ticketManager.exampleTicketMethod();
-        ticketView.showTickets();
     }
 }

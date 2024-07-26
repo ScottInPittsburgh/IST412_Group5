@@ -26,7 +26,7 @@ public class IST412_Group5 {
         UserProfileManager userProfileManager = new UserProfileManager();
         
         TicketManager ticketManager = new TicketManager();
-        TicketView ticketView = new TicketView();
+
 
         // Initialize the statistics manager
         StatisticsManager statisticsManager = new StatisticsManager();
@@ -37,7 +37,7 @@ public class IST412_Group5 {
         // Initialize the statistics controller with the statistics manager
         StatisticsController statisticsController = new StatisticsController(statisticsManager);
         
-        TicketController ticketController = new TicketController(ticketManager, ticketView);
+        TicketController ticketController = new TicketController(ticketManager);
 
         // Display the login view
         new LoginView(userProfileManager, feedbackController, statisticsController, ticketController);
