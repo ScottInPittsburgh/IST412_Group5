@@ -4,8 +4,10 @@
  */
 package com.mycompany.ist412_group5.view;
 
+import java.awt.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  *
@@ -15,14 +17,33 @@ public class CheckOut {
 
     //variables for checkout class
     String payment = " ";
+    private HomeView homeView;
+    public JLabel test = new JLabel();
+    public JButton VISA = new JButton();
+
+    public JPanel panel = new JPanel(new BorderLayout());
+    public JButton MasterCard = new JButton();
+    public JButton AMEX = new JButton();
+    public JButton CAPONE = new JButton();
+
     static ArrayList<Tickets> ps = new ArrayList<>();
     ArrayList<Integer> ticket = new ArrayList<>();
     String creditCard = " ";
     double totalAmount = 0;
 
 
+
     //This method allows the user to see the number of tickets purchase, the purchase price (total) and the tax.
     public void add(ArrayList<Integer> x, int ticketTotal){
+        test.setText("How do you want to pay?");
+
+        panel.add(VISA);
+        panel.add(MasterCard);
+        panel.add(AMEX);
+        panel.add(CAPONE);
+        homeView.updateMainContentPanel(panel);
+
+
         String payment = JOptionPane.showInputDialog(null, "How do you want to pay? VISA, MasterCard, Amex, Chase or CapitalOne?");
         String card = " ";
         switch (payment){

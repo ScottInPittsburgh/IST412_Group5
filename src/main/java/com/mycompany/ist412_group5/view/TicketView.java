@@ -5,6 +5,7 @@ import com.mycompany.ist412_group5.controller.TicketController;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.*;
@@ -25,8 +26,13 @@ public class TicketView extends JPanel {
     int ticketPurchase = 0;
     int ticketTotal = 0;
     int ticketRemaining = 1000;
+    JButton OKButton = new JButton("OK");
     Scanner Scanner = new Scanner(System.in);
     String userID;
+    JTextField textField2 = new JTextField();
+    JComboBox jComboBox1 = new JComboBox();
+    JTextField textField3 = new JTextField();
+    JPanel jPanel1Purchase = new JPanel();
 
     /**
      * Creates new form Cart
@@ -62,9 +68,13 @@ public class TicketView extends JPanel {
         jPanel1 = new javax.swing.JPanel(new BorderLayout());
         jPanel2 = new javax.swing.JPanel();
         //jFrame1 = (JFrame) SwingUtilities.getWindowAncestor(jPanel2);
+        jLabel2.setVisible(true);
+        jLabel1.setVisible(true);
+        jButton1.setVisible(true);
+        jButton2.setVisible(true);
+        jButton3.setVisible(true);
 
-
-
+        jLabel2.setText("Buy Ticket");
         jButton2.setText("OK");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,8 +82,8 @@ public class TicketView extends JPanel {
             }
         });
 
-        jLabel2.setText("Buy Ticket");
 
+        jLabel5.setText("View Ticket");
         jButton3.setText("OK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,8 +91,8 @@ public class TicketView extends JPanel {
             }
         });
 
-        jLabel5.setText("View Ticket");
 
+        jLabel1.setText("Cancel Tickets");
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,9 +100,7 @@ public class TicketView extends JPanel {
             }
         });
 
-        jLabel1.setText("Cancel Tickets");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+      javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,6 +153,8 @@ homeView.updateMainContentPanel(jPanel1);
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         CheckOut CO = new CheckOut();
         CO.viewingTickets();
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /*
@@ -155,36 +165,149 @@ homeView.updateMainContentPanel(jPanel1);
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int key = 0;
         ticketTotal = 0;
-        int temp = 0;
-        while (key != 1){
+        jLabel2.setVisible(false);
+        jLabel1.setVisible(false);
+        jButton1.setVisible(false);
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
+        OKButton.setVisible(true);
 
-            temp =  Integer.valueOf(JOptionPane.showInputDialog(null, "How many tickets do you want?"));
 
 
-            tempTicket.add(temp);
+            JPanel panel = new JPanel(new BorderLayout());
+            JLabel jLabel1 = new JLabel("Quantity Tickets: ");
+        JLabel jLabel2 = new JLabel("Payment Method: ");
+        JLabel jLabel3 = new JLabel("Price: ");
+        textField3.setEditable(false);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "VISA", "MasterCard", "Amex", "Chase", "CapitalOne" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(130, 130, 130)
+                                                .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(129, 129, 129)
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                        .addGap(80, 80, 80)
+                                                        .addComponent(jLabel1)
+                                                        .addGap(26, 26, 26)
+                                                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGap(66, 66, 66)
+                                                        .addComponent(OKButton)
+                                                        .addGap(23, 23, 23))))
+                                .addContainerGap(161, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1))
+                                .addGap(15, 15, 15)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(17, 17, 17)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3))
+                                .addGap(39, 39, 39)
+                                .addComponent(OKButton)
+                                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+
+
+panel.add(jPanel1Purchase);
+            homeView.updateMainContentPanel(panel);
+
+            OKButton.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButtonOKActionPerformed(evt);
+                }
+            });
+
+
+
+/*
             if(temp == 0){JOptionPane.showMessageDialog(null, "The amount of ticket purchase needs to be higher than 0.");}
             else{
                 var decision =JOptionPane.showInputDialog(null, "are you ready to purchase? Type in Yes or No.");
                 if("Yes".equals(decision) || "yes".equals(decision)){key = 1; break;}
             }
-        }
-        for(int i =0; i<=tempTicket.size()-1; i++){
-            ticketTotal = ticketTotal + tempTicket.get(i);
-            ticketRemaining = ticketRemaining - tempTicket.get(i);
-        }
+            */
 
-        System.out.println(ticketTotal + " " + ticketRemaining);
 
-        CheckOut CO = new CheckOut();
-        CO.add(tempTicket, ticketTotal);
-        tempTicket.clear();
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {
+        int key = 0;
+        String MethodPayment = "";
+
+
+/*
+    if(jComboBox1.setSelectedIndex(-1) == -1){ JOptionPane.showMessageDialog(null,"You need to put in a value");}
+else {
+
+ */
+        int AmountTickets = Integer.parseInt(textField2.getText());
+        System.out.println(AmountTickets);
+        MethodPayment = textField2.getText();
+        tempTicket.add(AmountTickets);
+
+        if (AmountTickets == 0) {
+            JOptionPane.showMessageDialog(null, "The tickets purchase needs to be higher than 0");
+        } else {
+            for (int i = 0; i <= tempTicket.size() - 1; i++) {
+                ticketTotal = ticketTotal + tempTicket.get(i);
+                ticketRemaining = ticketRemaining - tempTicket.get(i);
+            }
+        }
+        com.mycompany.ist412_group5.model.ticketing.Price p = new com.mycompany.ist412_group5.model.ticketing.Price();
+        float ticketPrice = p.getPrice();
+        double total = Math.round((ticketPrice*ticketTotal)*100.00)/100.00;
+        System.out.println(total);
+        textField3.setText(String.valueOf("$" + total));
+    }/*
+            switch (MethodPayment) {
+
+                case "VISA", "Visa": confirmPurchase(); break;
+                case "MasterCard", "mastercard": confirmPurchase(); break;
+                case "Amex", "amex": confirmPurchase(); break;
+                case "Chase", "chase" : confirmPurchase(); break;
+                case "CapitalOne", "capitalone": confirmPurchase(); break;
+
+
+                default:
+                   JOptionPane.showMessageDialog(null, "Invalid Method Card Payment: Try again with another card.");
+            }
+
+
+        System.out.println(ticketTotal + " " + ticketRemaining);
+         tempTicket.clear();
+    }
+*/
+    private void confirmPurchase() {
+        JOptionPane.showMessageDialog(null, "HEY!");
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CheckOut CO = new CheckOut();
         CO.viewingTicketsCancel();
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
