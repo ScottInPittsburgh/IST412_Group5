@@ -27,7 +27,6 @@ public class IST412_Group5 {
         
         TicketManager ticketManager = new TicketManager();
 
-
         // Initialize the statistics manager
         StatisticsManager statisticsManager = new StatisticsManager();
 

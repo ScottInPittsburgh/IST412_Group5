@@ -11,6 +11,8 @@ import java.awt.*;
 /**
  * Main view class for the WallyLand Vacation Planner application.
  * Handles the display of various components based on user actions.
+ *
+ * @author Frank Imbrunone
  */
 public class HomeView {
     private JPanel mainContentPanel;
@@ -104,8 +106,8 @@ public class HomeView {
         purchaseTicketsButton.addActionListener(e -> {
             TicketView ticketView = new TicketView(this, ticketController);
             ticketView.initComponents();
-
         });
+
 
         // Handle schedule activities action
         scheduleActivitiesButton.addActionListener(e -> {

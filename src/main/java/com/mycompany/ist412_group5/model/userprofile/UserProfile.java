@@ -1,10 +1,16 @@
 package com.mycompany.ist412_group5.model.userprofile;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * This class represents a user profile.
  * It contains information about the user's ID, password, name, email, phone, role, and emergency contact.
+ *
+ * @author Frank Imbrunone
  */
 public class UserProfile implements Serializable {
     private String userId;
@@ -14,6 +20,7 @@ public class UserProfile implements Serializable {
     private String phone;
     private String role;
     private EmergencyContact emergencyContact;
+    private List<String> ticketPurchases;
 
     /**
      * Constructs a UserProfile instance.
@@ -34,6 +41,7 @@ public class UserProfile implements Serializable {
         this.phone = phone;
         this.role = role;
         this.emergencyContact = emergencyContact;
+        this.ticketPurchases = new ArrayList<>();
     }
 
     /**
@@ -116,4 +124,24 @@ public class UserProfile implements Serializable {
     public EmergencyContact getEmergencyContact() {
         return emergencyContact;
     }
+
+    /**
+     * Gets ticket purchases
+     *
+     * @return ticket purchase details
+     */
+    public List<String> getTicketPurchases() {
+        return ticketPurchases;
+    }
+
+    /**
+     * Adds date to ticket purchase
+     *
+     * @return ticket purchase details with date/timestamp
+     */
+    public void addTicketPurchase(String purchase) {
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
+        this.ticketPurchases.add(purchase);
+    }
+
 }

@@ -5,9 +5,12 @@ import com.mycompany.ist412_group5.model.userprofile.EmergencyContact;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 /**
  * View class for displaying and editing user profiles.
+ *
+ * @author Frank Imbrunone
  */
 public class UserProfileView {
 
@@ -93,7 +96,33 @@ public class UserProfileView {
 
         profileDetailsPanel.add(updateInfoButton, gbc);
 
-        profilePanel.add(profileDetailsPanel, BorderLayout.CENTER);
+        profilePanel.add(profileDetailsPanel, BorderLayout.NORTH);
+
+        // Add order history section with scroll pane
+        JPanel orderHistoryPanel = new JPanel(new GridBagLayout());
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.WEST;
+
+        List<String> ticketPurchases = userProfile.getTicketPurchases();
+        for (int i = 0; i < ticketPurchases.size(); i++) {
+            gbc.gridy = i + 1;
+            orderHistoryPanel.add(new JLabel(ticketPurchases.get(i)), gbc);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(orderHistoryPanel);
+        scrollPane.setPreferredSize(new Dimension(300, 100)); // Set to a smaller size
+
+        // Create a new panel to hold the label and scroll pane
+        JPanel orderHistoryContainer = new JPanel(new BorderLayout());
+        JLabel orderHistoryLabel = new JLabel("Order History:");
+        orderHistoryLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        orderHistoryContainer.add(orderHistoryLabel, BorderLayout.NORTH);
+        orderHistoryContainer.add(scrollPane, BorderLayout.CENTER);
+
+        // Add the new panel to the main profile panel
+        profilePanel.add(orderHistoryContainer, BorderLayout.CENTER);
 
         // Panel for the back button to adjust its position
         JPanel buttonPanel = new JPanel();
@@ -179,17 +208,17 @@ public class UserProfileView {
 
         // Add save button
         gbc.gridy = 6;
-        gbc.anchor = GridBagConstraints.CENTER; // Center the button
+        gbc.anchor = GridBagConstraints.CENTER;
 
         JButton saveButton = new JButton("Save");
-        saveButton.setPreferredSize(new Dimension(160, 30)); // setting the size to match other buttons
+        saveButton.setPreferredSize(new Dimension(160, 30));
         saveButton.addActionListener(e -> {
             userProfile.setEmail(emailField.getText());
             userProfile.setPhone(phoneField.getText());
             userProfile.getEmergencyContact().setName(emergencyContactNameField.getText());
             userProfile.getEmergencyContact().setPhone(emergencyContactPhoneField.getText());
             homeView.getUserProfileManager().saveToFile(); // Save changes
-            homeView.updateMainContentPanel(new JPanel()); // Navigate back
+            displayUserProfile(userProfile); // Display the updated profile
             JOptionPane.showMessageDialog(null, "Profile updated successfully!");
         });
 
@@ -203,7 +232,7 @@ public class UserProfileView {
 
         // Adding back button
         JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(160, 30)); // setting the size to match other buttons
+        backButton.setPreferredSize(new Dimension(160, 30));
         backButton.addActionListener(e -> displayUserProfile(userProfile));
         buttonPanel.add(backButton);
 

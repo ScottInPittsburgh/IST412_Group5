@@ -4,6 +4,9 @@ import java.util.Map;
 
 /**
  * Interface for managing user profiles.
+ *
+ * @author Frank Imbrunone
+ *
  */
 public interface IntUserProfileManager {
 

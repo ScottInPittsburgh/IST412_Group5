@@ -6,6 +6,8 @@ import java.util.Map;
 
 /**
  * Manages user profiles, including authentication, registration, and persistent storage.
+ *
+ * @author Frank Imbrunone
  */
 public class UserProfileManager implements IntUserProfileManager, Serializable {
     private Map<String, UserProfile> users;
