@@ -61,7 +61,7 @@ public class TicketView extends JPanel {
 
         jComboBox1.setModel(new DefaultComboBoxModel<>(new String[]{"VISA", "MasterCard", "Amex"}));
 
-        // Date Picker setup
+        // Date Picker
         SpinnerDateModel dateModel = new SpinnerDateModel();
         datePicker = new JSpinner(dateModel);
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(datePicker, "MM/dd/yyyy");
@@ -184,7 +184,6 @@ public class TicketView extends JPanel {
             String purchase = "Purchased " + amountTickets + " tickets for $" + totalPrice + " using " + paymentMethod;
             String purchaseDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
             user.addTicketPurchase("Purchase Date: " + purchaseDate + " | " + "Tickets: " + amountTickets + " | " + "Price: $" + totalPrice + " | " + "Visit Date: " + visitDateString);
-            //user.addTicketPurchase(purchase + " on " + purchaseDate + " for visit on " + visitDateString);
 
             // Save the updated user profile
             homeView.getUserProfileManager().saveToFile();

@@ -80,7 +80,7 @@ public class UserProfileView {
         gbc.gridx = 1;
         profileDetailsPanel.add(new JLabel(userProfile.getEmergencyContact().getPhone()), gbc);
 
-        // Add vertical spacing
+        // Vertical spacing
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
@@ -91,7 +91,7 @@ public class UserProfileView {
         gbc.anchor = GridBagConstraints.CENTER; // Center the button
 
         JButton updateInfoButton = new JButton("Update Info");
-        updateInfoButton.setPreferredSize(new Dimension(160, 30)); // setting the size to match other buttons
+        updateInfoButton.setPreferredSize(new Dimension(160, 30));
         updateInfoButton.addActionListener(e -> displayEditableUserProfile(userProfile));
 
         profileDetailsPanel.add(updateInfoButton, gbc);
@@ -99,38 +99,53 @@ public class UserProfileView {
         profilePanel.add(profileDetailsPanel, BorderLayout.NORTH);
 
         // Add order history section with scroll pane
-        JPanel orderHistoryPanel = new JPanel(new GridBagLayout());
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.WEST;
-
-        List<String> ticketPurchases = userProfile.getTicketPurchases();
-        for (int i = 0; i < ticketPurchases.size(); i++) {
-            gbc.gridy = i + 1;
-            orderHistoryPanel.add(new JLabel(ticketPurchases.get(i)), gbc);
-        }
-
-        JScrollPane scrollPane = new JScrollPane(orderHistoryPanel);
-        scrollPane.setPreferredSize(new Dimension(300, 100)); // Set to a smaller size
-
-        // Create a new panel to hold the label and scroll pane
-        JPanel orderHistoryContainer = new JPanel(new BorderLayout());
+        JPanel orderHistoryPanel = new JPanel(new BorderLayout());
         JLabel orderHistoryLabel = new JLabel("Order History:");
         orderHistoryLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        orderHistoryContainer.add(orderHistoryLabel, BorderLayout.NORTH);
-        orderHistoryContainer.add(scrollPane, BorderLayout.CENTER);
+        orderHistoryPanel.add(orderHistoryLabel, BorderLayout.NORTH);
 
-        // Add the new panel to the main profile panel
-        profilePanel.add(orderHistoryContainer, BorderLayout.CENTER);
+        DefaultListModel<String> orderListModel = new DefaultListModel<>();
+        JList<String> orderList = new JList<>(orderListModel);
+        for (String purchase : userProfile.getTicketPurchases()) {
+            orderListModel.addElement(purchase);
+        }
+        JScrollPane scrollPane = new JScrollPane(orderList);
+        scrollPane.setPreferredSize(new Dimension(400, 150));
+        orderHistoryPanel.add(scrollPane, BorderLayout.CENTER);
+
+        // Create a panel for the cancel button with FlowLayout to alter the size
+        JPanel cancelButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        // Cancel button
+        JButton cancelButton = new JButton("Cancel Purchase");
+        cancelButton.setPreferredSize(new Dimension(160, 30));
+        cancelButton.addActionListener(e -> {
+            String selectedPurchase = orderList.getSelectedValue();
+            if (selectedPurchase != null) {
+                userProfile.removeTicketPurchase(selectedPurchase);
+                homeView.getUserProfileManager().saveToFile();
+                orderListModel.removeElement(selectedPurchase);
+                JOptionPane.showMessageDialog(null, "Purchase canceled successfully!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Please select a purchase to cancel.");
+            }
+        });
+
+        // Add the cancel button to a panel
+        cancelButtonPanel.add(cancelButton);
+
+        // Add new panel with the cancel button to the order history panel
+        orderHistoryPanel.add(cancelButtonPanel, BorderLayout.SOUTH);
+
+        profilePanel.add(orderHistoryPanel, BorderLayout.CENTER);
 
         // Panel for the back button to adjust its position
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Add vertical padding
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Vertical padding
 
         // Adding back button
         JButton backButton = new JButton("Back");
-        backButton.setPreferredSize(new Dimension(160, 30)); // setting the size to match other buttons
+        backButton.setPreferredSize(new Dimension(160, 30));
         backButton.addActionListener(e -> homeView.updateMainContentPanel(new JPanel()));
         buttonPanel.add(backButton);
 
@@ -200,13 +215,13 @@ public class UserProfileView {
         JTextField emergencyContactPhoneField = new JTextField(userProfile.getEmergencyContact().getPhone(), 20);
         profileDetailsPanel.add(emergencyContactPhoneField, gbc);
 
-        // Add vertical spacing
+        // Vertical spacing
         gbc.gridx = 0;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
         profileDetailsPanel.add(Box.createVerticalStrut(15), gbc);
 
-        // Add save button
+        // Save button
         gbc.gridy = 6;
         gbc.anchor = GridBagConstraints.CENTER;
 
@@ -228,9 +243,9 @@ public class UserProfileView {
 
         // Panel for the back button to adjust its position
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Add vertical padding
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20)); // Vertical padding
 
-        // Adding back button
+        // Back button
         JButton backButton = new JButton("Back");
         backButton.setPreferredSize(new Dimension(160, 30));
         backButton.addActionListener(e -> displayUserProfile(userProfile));

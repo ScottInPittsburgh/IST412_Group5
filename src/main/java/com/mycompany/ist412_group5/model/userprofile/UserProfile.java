@@ -135,13 +135,22 @@ public class UserProfile implements Serializable {
     }
 
     /**
-     * Adds date to ticket purchase
+     * Adds a ticket purchase to the user's purchase history with the current date and time.
      *
-     * @return ticket purchase details with date/timestamp
+     * @param purchase the purchase details to be added
      */
     public void addTicketPurchase(String purchase) {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         this.ticketPurchases.add(purchase);
+    }
+
+    /**
+     * Removes a ticket purchase from the user's purchase history.
+     *
+     * @param purchase the purchase details to be removed
+     */
+    public void removeTicketPurchase(String purchase) {
+        this.ticketPurchases.remove(purchase);
     }
 
 }
