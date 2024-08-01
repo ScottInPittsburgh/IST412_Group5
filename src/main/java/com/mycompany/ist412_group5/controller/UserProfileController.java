@@ -11,6 +11,8 @@ import java.util.Map;
 
 /**
  * Controller for managing User Profiles
+ *
+ * @author Frank Imbrunone
  */
 public class UserProfileController {
 

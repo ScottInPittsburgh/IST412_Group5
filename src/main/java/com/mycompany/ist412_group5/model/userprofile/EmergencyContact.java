@@ -5,6 +5,9 @@ import java.io.Serializable;
 /**
  * Represents an emergency contact for a user profile.
  * Implements Serializable for saving and loading the contact information.
+ *
+ * @author Frank Imbrunone
+ *
  */
 public class EmergencyContact implements Serializable {
     private String name;

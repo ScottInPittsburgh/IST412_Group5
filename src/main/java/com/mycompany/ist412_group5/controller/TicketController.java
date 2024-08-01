@@ -6,24 +6,26 @@ import com.mycompany.ist412_group5.view.TicketView;
 
 /**
  * Controller - ticket related operations
+ *
+ * @author Jed Galvo
  */
 public class TicketController {
     private IntTicketManager ticketManager;
     private TicketView ticketView;
 
-     /**
+    /**
      * Construct new TicketController instance
      */
-    public TicketController(TicketManager ticketManager, TicketView ticketView) {
-        this.ticketManager = new TicketManager();
-        this.ticketView = new TicketView();
+    public TicketController(TicketManager ticketManager) {
+        this.ticketManager = ticketManager;
     }
 
     /**
-     * Example standin method for ticket handling
+     * Sets TicketView
      */
-    public void exampleTicketMethod() {
-        ticketManager.exampleTicketMethod();
-        ticketView.showTickets();
+    public void setTicketView(TicketView ticketView) {
+        this.ticketView = ticketView;
     }
+
 }
+

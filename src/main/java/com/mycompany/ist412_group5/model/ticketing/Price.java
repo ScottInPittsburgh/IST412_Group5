@@ -1,26 +1,59 @@
 package com.mycompany.ist412_group5.model.ticketing;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
+ * Price class for ticket pricing operations.
+ * This class handles the price of a ticket and the calculation of tax based on the price.
  *
- * @author Jed Elijah Galvo
+ * @author Jed Galvo
  */
 public class Price {
-   //private attributes for the Price class
-private float price = 6.99f;
-private float tax = .06f;
-    
-    //The get and set prices
-public float getPrice(){return price;}
+    // private attributes for the Price class
+    private float price = 47.99f;
+    private float taxRate = 0.06f;
 
-public static void setPrice( float price) {}
+    /**
+     * Gets the price of a ticket.
+     *
+     * @return the price of a ticket
+     */
+    public float getPrice() {
+        return price;
+    }
 
-public float getTax(){return tax;}
+    /**
+     * Sets the price of a ticket.
+     *
+     * @param price the new price to set
+     */
+    public static void setPrice(float price) {
+        // Method left intentionally blank
+    }
 
-public static void setTax(float tax) {}
+    /**
+     * Gets the tax rate.
+     *
+     * @return the tax rate
+     */
+    public float getTaxRate() {
+        return taxRate;
+    }
+
+    /**
+     * Sets the tax rate.
+     *
+     * @param taxRate the new tax rate to set
+     */
+    public static void setTaxRate(float taxRate) {
+        // Method left intentionally blank
+    }
+
+    /**
+     * Calculates the tax based on the given amount.
+     *
+     * @param amount the amount to calculate tax for
+     * @return the calculated tax
+     */
+    public double calculateTax(double amount) {
+        return amount * taxRate;
+    }
 }
-
