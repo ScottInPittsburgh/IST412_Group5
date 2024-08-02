@@ -62,6 +62,32 @@ public class StatisticsManager implements IntStatisticsManager, Serializable {
     }
 
     /**
+     * Deletes feedback from the feedback list and saves the updated list to a file.
+     *
+     * @param feedbackText The text of the feedback to be deleted.
+     * @return true if the feedback was deleted, false otherwise
+     */
+    public boolean deleteFeedback(String feedbackText) {
+        feedbackText = feedbackText.replaceAll("^user:|admin:", "").trim(); // Remove user/admin labels and trim
+        for (Feedback feedback : feedbackList) {
+            String storedFeedbackText = feedback.getText().replaceAll("^user:|admin:", "").trim(); // Remove user/admin labels and trim
+            System.out.println("Comparing with: " + storedFeedbackText); // Debug line
+            if (storedFeedbackText.equalsIgnoreCase(feedbackText)) {
+                feedbackList.remove(feedback);
+                saveFeedbackToFile(); // Save the updated feedback list
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void removeFeedback(Feedback feedback) {
+        feedbackList.remove(feedback);
+        saveFeedbackToFile(); // Save changes after deletion
+    }
+
+
+    /**
      * Retrieves all feedback from the feedback list.
      *
      * @return A list of all feedback.
@@ -71,16 +97,18 @@ public class StatisticsManager implements IntStatisticsManager, Serializable {
         return feedbackList;
     }
 
+
     /**
      * Saves the feedback list to a file.
      */
-    private void saveFeedbackToFile() {
+    public void saveFeedbackToFile() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("feedback.ser"))) {
             oos.writeObject(feedbackList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Loads the feedback list from a file.

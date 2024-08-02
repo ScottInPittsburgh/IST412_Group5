@@ -59,7 +59,7 @@ public class FeedbackView {
     /**
      * Displays all feedback in a read-only format.
      */
-    public void displayAllFeedback() {
+    public void displayUserFeedback() {
         // Create a panel with BorderLayout
         JPanel panel = new JPanel(new BorderLayout());
 

@@ -108,6 +108,13 @@ public class HomeView {
             ticketView.initComponents();
         });
 
+        // Handle view feedback action
+        viewFeedbackButton.addActionListener(e -> {
+            AdminView adminView = new AdminView(this, feedbackController, new UserProfileController(this, userProfileManager));
+            adminView.displayUserFeedback(user);
+        });
+
+
 
         // Handle schedule activities action
         scheduleActivitiesButton.addActionListener(e -> {
@@ -132,9 +139,12 @@ public class HomeView {
 
         // Handle view feedback action
         viewFeedbackButton.addActionListener(e -> {
-            FeedbackView feedbackView = new FeedbackView(this, feedbackController);
-            feedbackView.displayAllFeedback();
+            AdminView adminView = new AdminView(this, feedbackController, new UserProfileController(this, userProfileManager));
+            adminView.displayUserFeedback(user);
         });
+
+
+
 
         // Handle admin view users action
         if ("admin".equals(role)) {

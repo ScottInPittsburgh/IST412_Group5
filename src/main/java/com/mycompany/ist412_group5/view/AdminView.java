@@ -62,21 +62,48 @@ public class AdminView {
     /**
      * Displays all user feedback in a text pane.
      */
-    public void displayUserFeedback() {
-        // Create a panel with BorderLayout
+    public void displayUserFeedback(UserProfile user) { // Added user parameter
         JPanel panel = new JPanel(new BorderLayout());
 
-        // Create a text pane for HTML content and wrap it in a scroll pane
-        JTextPane textPane = new JTextPane();
-        textPane.setContentType("text/html");
-        JScrollPane scrollPane = new JScrollPane(textPane);
+        // Create a JList for displaying feedback
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        JList<String> feedbackList = new JList<>(listModel);
+        feedbackList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Single selection mode
+        feedbackList.setVisibleRowCount(10); // Set visible row count
+        feedbackList.setFixedCellHeight(30); // Increase cell height for better visibility
+        feedbackList.setFixedCellWidth(300); // Set cell width
+
+        JScrollPane scrollPane = new JScrollPane(feedbackList);
         panel.add(scrollPane, BorderLayout.CENTER);
 
-        // Get all feedback and set it as the text pane's content
-        String feedback = feedbackController.getAllFeedback();
-        textPane.setText(feedback);
+        // Load feedback into the JList
+        String[] feedbackArray = feedbackController.getAllFeedback().split("<br>");
+        for (String feedback : feedbackArray) {
+            listModel.addElement(feedback.replaceAll("<[^>]*>", "").trim()); // Remove HTML tags and trim
+        }
 
-        // Update the main content panel with the feedback panel
+        // Only add delete button if user is admin
+        if ("admin".equals(user.getRole())) { // Check if user is admin
+            JButton deleteButton = new JButton("Delete Review");
+            deleteButton.addActionListener(e -> {
+                String selectedFeedback = feedbackList.getSelectedValue();
+                if (selectedFeedback != null && !selectedFeedback.isEmpty()) {
+                    String strippedFeedback = selectedFeedback.replaceAll("^user:|admin:", "").replaceAll("<[^>]*>", "").trim(); // Ensure stripping HTML and user/admin labels
+                    boolean success = feedbackController.deleteFeedback(strippedFeedback);
+                    if (success) {
+                        JOptionPane.showMessageDialog(panel, "Feedback deleted successfully!");
+                        listModel.removeElement(selectedFeedback); // Remove deleted feedback from the list
+                    } else {
+                        JOptionPane.showMessageDialog(panel, "Failed to delete feedback.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(panel, "Please select feedback to delete.");
+                }
+            });
+            panel.add(deleteButton, BorderLayout.SOUTH);
+        }
+
         homeView.updateMainContentPanel(panel);
     }
+
 }
