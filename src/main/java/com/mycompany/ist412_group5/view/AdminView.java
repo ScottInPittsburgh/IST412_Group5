@@ -84,7 +84,7 @@ public class AdminView {
 
         // Only add delete button if user is admin
         if ("admin".equals(user.getRole())) { // Check if user is admin
-            JButton deleteButton = new JButton("Delete Review");
+            JButton deleteButton = new JButton("Delete Feedback");
             deleteButton.addActionListener(e -> {
                 String selectedFeedback = feedbackList.getSelectedValue();
                 if (selectedFeedback != null && !selectedFeedback.isEmpty()) {
