@@ -71,7 +71,7 @@ public class StatisticsManager implements IntStatisticsManager, Serializable {
         feedbackText = feedbackText.replaceAll("^user:|admin:", "").trim();
         for (Feedback feedback : feedbackList) {
             String storedFeedbackText = feedback.getText().replaceAll("^user:|admin:", "").trim();
-            System.out.println("Comparing with: " + storedFeedbackText);
+            //System.out.println("Comparing with: " + storedFeedbackText);
             if (storedFeedbackText.equalsIgnoreCase(feedbackText)) {
                 feedbackList.remove(feedback);
                 saveFeedbackToFile();
