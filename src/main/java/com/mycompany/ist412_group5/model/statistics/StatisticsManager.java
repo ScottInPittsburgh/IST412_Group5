@@ -68,13 +68,13 @@ public class StatisticsManager implements IntStatisticsManager, Serializable {
      * @return true if the feedback was deleted, false otherwise
      */
     public boolean deleteFeedback(String feedbackText) {
-        feedbackText = feedbackText.replaceAll("^user:|admin:", "").trim(); // Remove user/admin labels and trim
+        feedbackText = feedbackText.replaceAll("^user:|admin:", "").trim();
         for (Feedback feedback : feedbackList) {
-            String storedFeedbackText = feedback.getText().replaceAll("^user:|admin:", "").trim(); // Remove user/admin labels and trim
-            System.out.println("Comparing with: " + storedFeedbackText); // Debug line
+            String storedFeedbackText = feedback.getText().replaceAll("^user:|admin:", "").trim();
+            System.out.println("Comparing with: " + storedFeedbackText);
             if (storedFeedbackText.equalsIgnoreCase(feedbackText)) {
                 feedbackList.remove(feedback);
-                saveFeedbackToFile(); // Save the updated feedback list
+                saveFeedbackToFile();
                 return true;
             }
         }
@@ -83,7 +83,7 @@ public class StatisticsManager implements IntStatisticsManager, Serializable {
 
     public void removeFeedback(Feedback feedback) {
         feedbackList.remove(feedback);
-        saveFeedbackToFile(); // Save changes after deletion
+        saveFeedbackToFile();
     }
 
 

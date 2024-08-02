@@ -79,7 +79,7 @@ public class AdminView {
         // Load feedback into the JList
         String[] feedbackArray = feedbackController.getAllFeedback().split("<br>");
         for (String feedback : feedbackArray) {
-            listModel.addElement(feedback.replaceAll("<[^>]*>", "").trim()); // Remove HTML tags and trim
+            listModel.addElement(feedback.replaceAll("<[^>]*>", "").trim());
         }
 
         // Only add delete button if user is admin
@@ -88,7 +88,7 @@ public class AdminView {
             deleteButton.addActionListener(e -> {
                 String selectedFeedback = feedbackList.getSelectedValue();
                 if (selectedFeedback != null && !selectedFeedback.isEmpty()) {
-                    String strippedFeedback = selectedFeedback.replaceAll("^user:|admin:", "").replaceAll("<[^>]*>", "").trim(); // Ensure stripping HTML and user/admin labels
+                    String strippedFeedback = selectedFeedback.replaceAll("^user:|admin:", "").replaceAll("<[^>]*>", "").trim();
                     boolean success = feedbackController.deleteFeedback(strippedFeedback);
                     if (success) {
                         JOptionPane.showMessageDialog(panel, "Feedback deleted successfully!");

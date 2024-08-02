@@ -42,7 +42,7 @@ public class FeedbackController {
      */
     public String getAllFeedback() {
         StringBuilder feedbackText = new StringBuilder();
-        feedbackText.append("<html>"); // Start HTML
+        feedbackText.append("<html>");
         for (Feedback feedback : statisticsManager.getAllFeedback()) {
             feedbackText.append("<span style='color:blue;'><b>")
                     .append(feedback.getUserId())
@@ -50,7 +50,7 @@ public class FeedbackController {
                     .append(feedback.getText())
                     .append("<br>");
         }
-        feedbackText.append("</html>"); // End HTML
+        feedbackText.append("</html>");
         return feedbackText.toString();
     }
 
@@ -62,8 +62,7 @@ public class FeedbackController {
      * @return true if the feedback was deleted, false otherwise
      */
     public boolean deleteFeedback(String feedbackText) {
-        feedbackText = feedbackText.replaceAll("<[^>]*>", "").replaceAll("^user:|admin:", "").trim(); // Remove HTML tags, user/admin labels, and trim
-        System.out.println("Attempting to delete feedback: " + feedbackText); // Debug line
+        feedbackText = feedbackText.replaceAll("<[^>]*>", "").replaceAll("^user:|admin:", "").trim();
         return statisticsManager.deleteFeedback(feedbackText);
     }
 
