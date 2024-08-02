@@ -87,7 +87,7 @@ public class LoginView {
         loginButton.addActionListener(e -> {
             String userId = userText.getText();
             String password = new String(passwordText.getPassword());
-            System.out.println("Attempting login with UserID: " + userId);
+           //System.out.println("Attempting login with UserID: " + userId);
             UserProfile user = userProfileManager.authenticate(userId, password);
             if (user != null) {
                 // If authentication is successful, show the home view

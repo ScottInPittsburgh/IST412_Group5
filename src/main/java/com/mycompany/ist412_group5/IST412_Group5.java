@@ -7,7 +7,6 @@ import com.mycompany.ist412_group5.model.statistics.StatisticsManager;
 import com.mycompany.ist412_group5.model.ticketing.TicketManager;
 import com.mycompany.ist412_group5.model.userprofile.UserProfileManager;
 import com.mycompany.ist412_group5.view.LoginView;
-import com.mycompany.ist412_group5.view.TicketView;
 
 
 /**

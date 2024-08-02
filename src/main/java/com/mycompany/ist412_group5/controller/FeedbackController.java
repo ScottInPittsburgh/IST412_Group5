@@ -2,7 +2,9 @@ package com.mycompany.ist412_group5.controller;
 
 import com.mycompany.ist412_group5.model.statistics.Feedback;
 import com.mycompany.ist412_group5.model.statistics.StatisticsManager;
-import com.mycompany.ist412_group5.view.FeedbackView;
+
+
+import java.util.List;
 
 /**
  * Controller class for managing feedback operations.
@@ -11,7 +13,6 @@ import com.mycompany.ist412_group5.view.FeedbackView;
  */
 public class FeedbackController {
     private StatisticsManager statisticsManager;
-    private FeedbackView feedbackView;
 
     /**
      * Constructs a FeedbackController instance.
@@ -33,6 +34,7 @@ public class FeedbackController {
         statisticsManager.addFeedback(feedback);
     }
 
+
     /**
      * Retrieves all feedback as a formatted HTML string.
      *
@@ -40,9 +42,35 @@ public class FeedbackController {
      */
     public String getAllFeedback() {
         StringBuilder feedbackText = new StringBuilder();
+        feedbackText.append("<html>");
         for (Feedback feedback : statisticsManager.getAllFeedback()) {
-            feedbackText.append("<b>").append(feedback.getUserId()).append("</b>: ").append(feedback.getText()).append("<br>");
+            feedbackText.append("<span style='color:blue;'><b>")
+                    .append(feedback.getUserId())
+                    .append("</b></span>: ")
+                    .append(feedback.getText())
+                    .append("<br>");
         }
+        feedbackText.append("</html>");
         return feedbackText.toString();
     }
+
+
+    /**
+     * Deletes feedback by the feedback text.
+     *
+     * @param feedbackText the text of the feedback to be deleted
+     * @return true if the feedback was deleted, false otherwise
+     */
+    public boolean deleteFeedback(String feedbackText) {
+        feedbackText = feedbackText.replaceAll("<[^>]*>", "").replaceAll("^user:|admin:", "").trim();
+        return statisticsManager.deleteFeedback(feedbackText);
+    }
+
+
+
+
+
+
+
 }
+
